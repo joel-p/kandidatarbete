@@ -6,7 +6,6 @@ import cv2
 
 def generate_data(dimensions, chunk_size):
     dataList = []
-
     calculated_size = int(dimensions/chunk_size)
 
     for i in range(calculated_size):
@@ -15,13 +14,13 @@ def generate_data(dimensions, chunk_size):
         dataList.append(baseData)
 
     binaryData = np.kron(np.array(dataList), np.ones((chunk_size,chunk_size), dtype=np.array(dataList).dtype))
+
     return binaryData
 
 def get_ag_complexity(data):
     r = robjects.r
     r['source']('2D_optim.R')
 
-    # Loading the function we have defined in R.
     ag_complexity_func = robjects.globalenv['Array_complexity']
 
     rpy2.robjects.numpy2ri.activate()
@@ -78,23 +77,23 @@ while target_ag > 0:
     target_ag = int(input("Target AG (0 to quit): "))
 
     if target_ag == 2:
-        generate(9, 4, target_ag)
+        generate(6, 1, target_ag)
     elif target_ag == 4:
-        generate(12, 4, target_ag)
+        generate(10, 1, target_ag)
     elif target_ag == 6:
-        generate(16, 4, target_ag)
+        generate(13, 1, target_ag)
     elif target_ag == 8:
-        generate(20, 4, target_ag)
-    elif target_ag == 10:
-        generate(24, 4, target_ag)
+        generate(16, 1, target_ag)
+    elif target_ag == 16.2:
+        generate(29, 1, target_ag)
     elif target_ag == 15:
         generate(32, 4, target_ag)
     elif target_ag == 20:
-        generate(42, 4, target_ag)
+        generate(35, 1, target_ag)
     elif target_ag == 31:
         generate(56, 4, target_ag)
     elif target_ag == 60:
         generate(100, 4, target_ag)
 
 
-process_file("8. Disorder/D_10.txt")
+# process_file("8. Disorder/D_10.txt")
