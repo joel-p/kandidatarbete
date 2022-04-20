@@ -65,13 +65,13 @@ def process_file(file_name):
 def generate(dimensions, target_ag, pattern_input_amount=0, pattern_input_length=0):
     ag_complexity = 0
     data = generate_data(dimensions)
-    count = 0
+    #count = 0
 
-    while (ag_complexity - target_ag + 1) > 1.1 or (ag_complexity - target_ag + 1) < 0.9: #Allowing a margin of 0.1 from target
+    while (ag_complexity - target_ag + 1) > 1.3 or (ag_complexity - target_ag + 1) < 0.7: #Allowing a margin of 0.3 from target
         data = generate_data(dimensions, pattern_input_amount, pattern_input_length)
         ag_complexity = get_ag_complexity(data)
         print(ag_complexity)
-        count += 1
+        #count += 1
         #if count == 100:
             #print("Increasing dimension...")
             #dimensions += 1
@@ -86,36 +86,52 @@ target_ag = 1
 while target_ag > 0:
     target_ag = int(input("Target AG (0 to quit): "))
 
-    #2
-    if target_ag == 2:
-        generate(6, target_ag)
-
-    #4
-    elif target_ag == 4:
-        generate(10, target_ag)
-    
-    #6
-    elif target_ag == 6:
-        generate(13, target_ag)
-    
     #8
-    elif target_ag == 8:
+    if target_ag == 8:
         generate(16, target_ag)
-    
+
     #10
     elif target_ag == 10:
-        generate(20, target_ag, 10, 5)
-    
+        generate(19, target_ag)
+
     #12
     elif target_ag == 12:
-        generate(23, target_ag, 12, 5)
-    
+        generate(22, target_ag)
+
     #14
     elif target_ag == 14:
-        generate(26, target_ag, 12, 5)
-    
+        generate(26, target_ag)
+
     #16
     elif target_ag == 16:
-        generate(29, target_ag, 12, 5)
+        generate(29, target_ag)
+
+    #18
+    elif target_ag == 18:
+        generate(32, target_ag)
+
+    #20
+    elif target_ag == 20:
+        generate(35, target_ag)
+
+    #22
+    elif target_ag == 22:
+        generate(38, target_ag)
+
+    #24
+    elif target_ag == 24:
+        generate(41, target_ag)
+
+    #26
+    elif target_ag == 26:
+        generate(44, target_ag)
+
+    #28
+    elif target_ag == 28:
+        generate(47, target_ag)
+
+    #30
+    elif target_ag == 30:
+        generate(50, target_ag)
 
 # process_file("8. Disorder/D_10.txt")
