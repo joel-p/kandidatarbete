@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import cv2
 import random
 import string
+import os
+from os import listdir
 
 def generate_data(dimensions, pattern_input_amount=0, pattern_input_length=0):
     dataList = []
@@ -52,6 +54,9 @@ def generate_image(data, target_ag):
 def generate_data_from_file(file):
     return np.genfromtxt(file, delimiter=1, dtype=np.int8)
 
+def convert_image(file_name):
+    img = cv2.imread(f"_generated/8-30/{file_name}")
+    plt.imsave(f"_generated/{file_name}.png", img)
 
 
 
@@ -80,8 +85,10 @@ def generate(dimensions, target_ag, pattern_input_amount=0, pattern_input_length
     print("AG: " + str(ag_complexity))
     generate_image(data, target_ag)
 
+for img in os.listdir("_generated/8-30"):
+    convert_image(img)
 
-target_ag = 1
+target_ag = 0
 
 while target_ag > 0:
     target_ag = int(input("Target AG (0 to quit): "))
@@ -135,3 +142,4 @@ while target_ag > 0:
         generate(50, target_ag)
 
 # process_file("8. Disorder/D_10.txt")
+
