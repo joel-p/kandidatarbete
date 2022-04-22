@@ -1,13 +1,9 @@
-from ntpath import join
 import rpy2.robjects as robjects
 import rpy2.robjects.numpy2ri
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import random
-import string
-import os
-from os import listdir
 
 def generate_data(dimensions, pattern_input_amount=0, pattern_input_length=0):
     dataList = []
@@ -41,22 +37,18 @@ def get_ag_complexity(data):
 
     return ag_complexity_func(matrix)[0]
 
-def generate_image(data, target_ag):
-    file_name = f"{str(target_ag)}_{''.join(random.choices(string.ascii_lowercase, k=5))}"
-    file_path = f"_generated/{file_name}.bmp"
+def generate_image(data, target_ag, name):
+    file_name = f"AG{str(target_ag)}_{name}"
+    file_path = f"_generated/{file_name}.png"
     plt.imsave(file_path, data, cmap='binary')
 
     img = cv2.imread(file_path)
     res = cv2.resize(img, dsize=(500, 500), interpolation=cv2.INTER_NEAREST)
 
-    plt.imsave(f"_generated/{file_name}_highres.bmp", res)
+    plt.imsave(f"_generated/{file_name}.png", res)
 
 def generate_data_from_file(file):
     return np.genfromtxt(file, delimiter=1, dtype=np.int8)
-
-def convert_image(file_name):
-    img = cv2.imread(f"_generated/8-30/{file_name}")
-    plt.imsave(f"_generated/{file_name}.png", img)
 
 
 
@@ -67,7 +59,7 @@ def process_file(file_name):
     print("AG: " + str(ag_complexity))
     generate_image(data, "test")
 
-def generate(dimensions, target_ag, pattern_input_amount=0, pattern_input_length=0):
+def generate(dimensions, target_ag, name, pattern_input_amount=0, pattern_input_length=0):
     ag_complexity = 0
     data = generate_data(dimensions)
     #count = 0
@@ -83,63 +75,61 @@ def generate(dimensions, target_ag, pattern_input_amount=0, pattern_input_length
             #count = 0
 
     print("AG: " + str(ag_complexity))
-    generate_image(data, target_ag)
+    generate_image(data, target_ag, name)
 
-for img in os.listdir("_generated/8-30"):
-    convert_image(img)
-
-target_ag = 0
+target_ag = 1
 
 while target_ag > 0:
     target_ag = int(input("Target AG (0 to quit): "))
+    file_name = str(input("Filename: "))
 
     #8
     if target_ag == 8:
-        generate(16, target_ag)
+        generate(16, target_ag, file_name)
 
     #10
     elif target_ag == 10:
-        generate(19, target_ag)
+        generate(19, target_ag, file_name)
 
     #12
     elif target_ag == 12:
-        generate(22, target_ag)
+        generate(22, target_ag, file_name)
 
     #14
     elif target_ag == 14:
-        generate(26, target_ag)
+        generate(26, target_ag, file_name)
 
     #16
     elif target_ag == 16:
-        generate(29, target_ag)
+        generate(29, target_ag, file_name)
 
     #18
     elif target_ag == 18:
-        generate(32, target_ag)
+        generate(32, target_ag, file_name)
 
     #20
     elif target_ag == 20:
-        generate(35, target_ag)
+        generate(35, target_ag, file_name)
 
     #22
     elif target_ag == 22:
-        generate(38, target_ag)
+        generate(38, target_ag, file_name)
 
     #24
     elif target_ag == 24:
-        generate(41, target_ag)
+        generate(41, target_ag, file_name)
 
     #26
     elif target_ag == 26:
-        generate(44, target_ag)
+        generate(44, target_ag, file_name)
 
     #28
     elif target_ag == 28:
-        generate(47, target_ag)
+        generate(47, target_ag, file_name)
 
     #30
     elif target_ag == 30:
-        generate(50, target_ag)
+        generate(50, target_ag, file_name)
 
 # process_file("8. Disorder/D_10.txt")
 
