@@ -83,6 +83,18 @@ while target_ag > 0:
     target_ag = int(input("Target AG (0 to quit): "))
     file_name = str(input("Filename: "))
 
+    #2
+    if target_ag == 2:
+        generate(6, target_ag, file_name)
+
+    #8
+    if target_ag == 4:
+        generate(10, target_ag, file_name)
+
+    #8
+    if target_ag == 6:
+        generate(13, target_ag, file_name)
+
     #8
     if target_ag == 8:
         generate(16, target_ag, file_name)
