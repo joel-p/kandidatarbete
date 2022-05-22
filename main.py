@@ -47,7 +47,7 @@ def process_file(file_name):
 
     ag_complexity = get_ag_complexity(data)
     print("AG: " + str(ag_complexity))
-    generate_image(data, "test")
+    generate_image(data, "XX", "test")
 
 def generate(dimensions, target_ag, name):
     ag_complexity = 0
